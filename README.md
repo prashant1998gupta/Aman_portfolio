@@ -25,7 +25,7 @@ These were filled in from his CV and the WhatsApp chat; the rest is inferred and
 - **Car Parking Simulator store link** — currently a Play Store search URL. Search `car%20parking` in `index.html`.
 - **Experience dates / companies** — Sloppy Studios (Sep 2025 – present) and MetaSpace (2021 – 2025) mirror the studios behind the games he listed; the 2020–2021 role is labelled "AR & mobile projects". Fix in the Experience tab (`index.html`) and `cv.html`.
 - **Cover art** — `assets/images/portfolio/game-kidzee.jpg` and `game-parking.jpg` are generated placeholders (1440×810). Replace with real store art.
-- **Live URL** — placeholders use `https://aman-yadav-portfolio.vercel.app`. After the first Vercel deploy, update `index.html` (canonical, `og:*`), `cv.html`, `neon.html`, `robots.txt`, `sitemap.xml`.
+- **Live URL** — placeholders use `https://prashant1998gupta.github.io/Aman_portfolio`. After the first Vercel deploy, update `index.html` (canonical, `og:*`), `cv.html`, `neon.html`, `robots.txt`, `sitemap.xml`.
 - **Availability line**, GitHub (none linked right now), photo — add if wanted.
 
 ## Key files

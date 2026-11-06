@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aman-yadav-portfolio.vercel.app/sitemap.xml
+Sitemap: https://prashant1998gupta.github.io/Aman_portfolio/sitemap.xml
