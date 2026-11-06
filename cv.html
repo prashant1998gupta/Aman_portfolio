@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Aman Yadav — CV | Unity 3D | VR Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="description" content="CV of Aman Yadav — Unity 3D | VR Developer (Mobile · VR/AR · Multiplayer), 5+ years, shipped on Google Play, the App Store and Meta Quest.">
+<link rel="icon" type="image/svg+xml" href="assets/images/logo/logo-mark.svg">
+<link rel="canonical" href="https://aman-yadav-portfolio.vercel.app/cv">
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800|Poppins:300,400,500,600&display=swap");
+
+    :root {
+        --ink: #17202e;
+        --muted: #55627a;
+        --line: #e3e7ee;
+        --accent: #f9004d;
+        --dark: #0b1120;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body {
+        font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+        color: var(--ink);
+        background: #eef1f6;
+        font-size: 10pt;
+        line-height: 1.45;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* on-screen toolbar (hidden in print) */
+    .toolbar {
+        max-width: 210mm; margin: 0 auto; padding: 14px 4px;
+        display: flex; justify-content: space-between; align-items: center;
+    }
+    .toolbar a {
+        font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
+        letter-spacing: 1px; color: var(--dark);
+        border: 2px solid var(--dark); border-radius: 8px; padding: 9px 18px;
+        transition: all .25s;
+    }
+    .toolbar a.accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .toolbar a:hover { transform: translateY(-2px); }
+
+    .sheet {
+        max-width: 210mm; margin: 0 auto 26px; background: #fff;
+        box-shadow: 0 12px 40px rgba(23, 32, 46, .14);
+    }
+
+    /* ============ header band ============ */
+    .band {
+        background: var(--dark); color: #fff;
+        padding: 9mm 12mm 8mm;
+        display: flex; gap: 8mm; align-items: center;
+    }
+    .band img.mark { width: 21mm; height: 21mm; flex-shrink: 0; }
+    .band > div { min-width: 0; }
+    .band h1 {
+        font-family: 'Montserrat', sans-serif; font-weight: 800;
+        font-size: 24pt; letter-spacing: 3px; line-height: 1.1;
+    }
+    .band .role {
+        color: var(--accent); font-family: 'Montserrat', sans-serif;
+        font-weight: 700; font-size: 11.5pt; letter-spacing: 1.5px; margin-top: 2mm;
+    }
+    .band .contact {
+        margin-top: 3mm; font-size: 9pt; color: #aab4c8; line-height: 1.7;
+    }
+    .band .contact b { color: #e8ecf3; font-weight: 500; }
+    .band .contact span.sep { color: var(--accent); margin: 0 2mm; }
+
+    /* ============ stats strip ============ */
+    .stats {
+        display: flex; border-bottom: 1px solid var(--line);
+    }
+    .stats div {
+        flex: 1; text-align: center; padding: 4mm 2mm;
+        border-right: 1px solid var(--line);
+    }
+    .stats div:last-child { border-right: 0; }
+    .stats b {
+        display: block; font-family: 'Montserrat', sans-serif; font-weight: 800;
+        font-size: 14pt; color: var(--accent);
+    }
+    .stats span { font-size: 8pt; color: var(--muted); letter-spacing: .5px; text-transform: uppercase; }
+
+    /* ============ body ============ */
+    .content { padding: 7mm 12mm 8mm; }
+    h2 {
+        font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 11.5pt;
+        letter-spacing: 2.5px; text-transform: uppercase; color: var(--dark);
+        margin: 6mm 0 3mm; display: flex; align-items: center; gap: 4mm;
+    }
+    .content > h2:first-child { margin-top: 0; }
+    h2::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, var(--accent), var(--line)); }
+
+    .summary { color: var(--muted); }
+    .summary b { color: var(--ink); font-weight: 600; }
+
+    /* experience */
+    .job { margin-bottom: 4.5mm; break-inside: avoid; }
+    .job header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+    .job h3 { font-family: 'Montserrat', sans-serif; font-size: 11.5pt; font-weight: 700; }
+    .job h3 em { font-style: normal; color: var(--accent); }
+    .job .when {
+        font-family: 'Montserrat', sans-serif; font-size: 8.5pt; font-weight: 600;
+        color: #fff; background: var(--dark); border-radius: 99px; padding: 1mm 3.5mm;
+    }
+    .job .where { font-size: 9pt; color: var(--muted); margin: .5mm 0 1.5mm; }
+    .job ul { list-style: none; }
+    .job li {
+        padding-left: 5mm; position: relative; margin-bottom: 1mm; color: #303c50;
+    }
+    .job li::before {
+        content: "▸"; position: absolute; left: 0; color: var(--accent); font-size: 9pt;
+    }
+
+    /* shipped titles */
+    .titles { display: flex; gap: 4mm; }
+    .title-card {
+        flex: 1; border: 1px solid var(--line); border-radius: 3mm; padding: 3.5mm 4mm;
+        break-inside: avoid;
+    }
+    .title-card b { font-family: 'Montserrat', sans-serif; font-size: 10pt; display: block; }
+    .title-card .plat { color: var(--accent); font-size: 8pt; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .title-card .meta { color: var(--muted); font-size: 8.5pt; margin-top: 1mm; }
+
+    /* tech chips */
+    .tech-row { display: flex; gap: 3mm; margin-bottom: 2.2mm; break-inside: avoid; }
+    .tech-row .lbl {
+        flex: 0 0 34mm; font-family: 'Montserrat', sans-serif; font-weight: 700;
+        font-size: 8.5pt; color: var(--dark); text-transform: uppercase; letter-spacing: .5px; padding-top: 1mm;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 1.6mm; }
+    .chips i {
+        font-style: normal; font-size: 8.5pt; color: #303c50;
+        border: 1px solid var(--line); background: #f6f8fb; border-radius: 99px; padding: .8mm 2.8mm;
+    }
+
+    /* projects + education */
+    .cols { display: flex; gap: 8mm; }
+    .cols > div { flex: 1; }
+    .mini { color: #303c50; }
+    .mini li { list-style: none; padding-left: 5mm; position: relative; margin-bottom: 1.2mm; }
+    .mini li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+    .mini b { font-weight: 600; }
+
+    .foot {
+        margin-top: 6mm; padding-top: 3mm; border-top: 1px solid var(--line);
+        font-size: 8.5pt; color: var(--muted); display: flex; justify-content: space-between;
+    }
+
+    @media only screen and (max-width: 640px) {
+        .band { flex-direction: column; text-align: center; gap: 4mm; padding: 8mm 6mm; }
+        .band > div { max-width: 100%; }
+        .band .contact { word-break: break-word; }
+        .band h1 { font-size: 17pt; }
+        .band .role { font-size: 9pt; }
+        .band .contact span.sep { margin: 0 1mm; }
+        .stats { flex-wrap: wrap; }
+        .stats div { flex: 1 1 40%; border-bottom: 1px solid var(--line); }
+        .content { padding: 6mm; }
+        .titles, .cols, .tech-row { flex-direction: column; }
+        .tech-row .lbl { flex: none; }
+        .job header { flex-direction: column; align-items: flex-start; gap: 1mm; }
+        .foot { flex-direction: column; gap: 1mm; }
+    }
+
+    @page { size: A4; margin: 0; }
+    @media print {
+        body { background: #fff; }
+        .toolbar { display: none; }
+        .sheet { box-shadow: none; margin: 0; max-width: none; }
+    }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+    <a href="index.html">← Back to Portfolio</a>
+    <a class="accent" href="#" onclick="window.print(); return false;">Print / Save as PDF</a>
+</div>
+
+<div class="sheet">
+    <div class="band">
+        <img class="mark" src="assets/images/logo/logo-mark.svg" alt="Aman Yadav logo">
+        <div>
+            <h1>AMAN YADAV</h1>
+            <div class="role">UNITY 3D | VR DEVELOPER · MOBILE · VR/AR · MULTIPLAYER</div>
+            <div class="contact">
+                <b>amanyadav7861998@gmail.com</b> <span class="sep">|</span> <b>+91 95604 48788</b> <span class="sep">|</span> New Delhi (Saket), India<br>
+                aman-yadav-portfolio.vercel.app <span class="sep">|</span> linkedin.com/in/aman-yadav
+            </div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div><b>5+</b><span>Years in Unity</span></div>
+        <div><b>3</b><span>Storefronts shipped</span></div>
+        <div><b>4.9★</b><span>15K+ reviews · Meta Quest</span></div>
+        <div><b>4</b><span>Titles live</span></div>
+    </div>
+
+    <div class="content">
+        <h2>Profile</h2>
+        <p class="summary">
+            Unity 3D &amp; VR developer with <b>5+ years</b> of experience shipping games and immersive apps on <b>Google Play, the App Store
+            and Meta Quest</b>. Specialist in <b>VR for Oculus Quest / Rift</b>, <b>AR experiences</b> (AR Foundation, ARKit / ARCore)
+            and <b>mobile gameplay</b> in C#, with a strong grounding in <b>game design</b>, performance optimization and modular
+            architecture. Clear communicator who works closely with artists, designers and clients — currently building
+            physics-driven VR titles at Sloppy Studios.
+        </p>
+
+        <h2>Experience</h2>
+
+        <div class="job">
+            <header>
+                <h3>Unity VR Developer — <em>Sloppy Studios</em></h3>
+                <span class="when">Sep 2025 – Present</span>
+            </header>
+            <div class="where">Noida, India · Hybrid</div>
+            <ul>
+                <li>Develop <b>Newton's Playground: Physics Sandbox</b> (Meta Quest) — physics-driven sandbox with realistic object manipulation, collision systems and performance-optimized mechanics — rated <b>4.9★ with 15,000+ reviews</b>.</li>
+                <li>Build and tune <b>VR interactions</b> (grab, throw, build tools) with the XR Interaction Toolkit, keeping the frame budget on Quest 2 and Quest 3.</li>
+                <li>Deliver polished visuals and smooth gameplay with <b>Unity (C#, URP, UGUI)</b>; collaborate with design and art in weekly playable builds.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <header>
+                <h3>Unity Game Developer — <em>MetaSpace (Payiza)</em></h3>
+                <span class="when">2021 – Sep 2025</span>
+            </header>
+            <div class="where">Noida, India</div>
+            <ul>
+                <li>Developed <b>Metaspace</b> — a sci-fi multiplayer shooter on Android &amp; iOS, rated <b>4.6★ on the App Store</b>.</li>
+                <li>Built multiplayer combat and match flow with <b>Photon PUN2</b> — spawning, kill/death tracking, respawns and leaderboards.</li>
+                <li>Implemented <b>Story and Arena</b> game modes, HUD / menu UI systems, character loadouts and progression.</li>
+                <li>Integrated ads, in-app purchases and analytics; profiled and optimized builds for low-end Android devices.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <header>
+                <h3>Unity Developer — <em>AR &amp; mobile projects</em></h3>
+                <span class="when">2020 – 2021</span>
+            </header>
+            <div class="where">New Delhi, India</div>
+            <ul>
+                <li>Built <b>Learn with Kidzee</b> — an AR learning app for Zee Learn's preschool programmes (App Store &amp; Google Play): image-tracked activity sheets, 3D characters and rhyme / activity content for early learners.</li>
+                <li>Developed <b>Car Parking Simulator</b> — a 3D driving &amp; parking game for Android with realistic vehicle controls, level progression and camera systems.</li>
+                <li>Owned game design, prototyping and iteration from concept to store release.</li>
+            </ul>
+        </div>
+
+        <h2>Shipped Titles</h2>
+        <div class="titles">
+            <div class="title-card">
+                <span class="plat">Meta Quest VR</span>
+                <b>Newton's Playground</b>
+                <div class="meta">Physics sandbox · 4.9★ · 15,000+ reviews</div>
+            </div>
+            <div class="title-card">
+                <span class="plat">Android · iOS</span>
+                <b>Metaspace</b>
+                <div class="meta">Multiplayer arena + story · 4.6★ App Store</div>
+            </div>
+            <div class="title-card">
+                <span class="plat">AR · iOS · Android</span>
+                <b>Learn with Kidzee</b>
+                <div class="meta">AR learning app · Zee Learn</div>
+            </div>
+            <div class="title-card">
+                <span class="plat">Android</span>
+                <b>Car Parking Simulator</b>
+                <div class="meta">3D driving &amp; parking game</div>
+            </div>
+        </div>
+
+        <h2>Tech Stack</h2>
+        <div class="tech-row"><div class="lbl">Languages</div><div class="chips"><i>C# (expert)</i><i>Python</i><i>HTML / CSS</i><i>JavaScript</i></div></div>
+        <div class="tech-row"><div class="lbl">Engines &amp; XR</div><div class="chips"><i>Unity 3D</i><i>URP / HDRP</i><i>UGUI</i><i>Oculus Quest / Rift</i><i>XR Interaction Toolkit</i><i>AR Foundation</i><i>ARKit / ARCore</i><i>Vuforia</i></div></div>
+        <div class="tech-row"><div class="lbl">Multiplayer</div><div class="chips"><i>Photon PUN2</i><i>Unity Netcode</i><i>Firebase</i><i>PlayFab</i><i>REST APIs</i></div></div>
+        <div class="tech-row"><div class="lbl">Game Design</div><div class="chips"><i>Mechanics &amp; Level Design</i><i>2D &amp; 3D Games</i><i>Prototyping</i><i>Playtesting</i><i>Monetization (IAP / Ads)</i></div></div>
+        <div class="tech-row"><div class="lbl">Practices</div><div class="chips"><i>OOP &amp; SOLID</i><i>Design Patterns</i><i>Modular Architecture</i><i>Object Pooling</i><i>State Machines</i><i>Profiling &amp; Optimization</i></div></div>
+        <div class="tech-row"><div class="lbl">Tools</div><div class="chips"><i>Git / GitHub</i><i>Plastic SCM</i><i>Jira</i><i>Rider</i><i>Visual Studio</i><i>Blender (basics)</i></div></div>
+
+        <div class="cols">
+            <div>
+                <h2>Highlights</h2>
+                <ul class="mini">
+                    <li><b>4.9★ VR title</b> — Newton's Playground, 15,000+ reviews on the Meta Quest store</li>
+                    <li><b>Multiplayer shipped</b> — Metaspace live on Google Play and the App Store</li>
+                    <li><b>AR for kids</b> — Learn with Kidzee for Zee Learn's preschool network</li>
+                    <li><b>Portfolio Mini Arcade</b> — 10 playable canvas games, hand-written vanilla JS (on my site)</li>
+                    <li><b>Strong communication</b> — client-facing delivery from concept to release</li>
+                </ul>
+            </div>
+            <div>
+                <h2>Education</h2>
+                <ul class="mini">
+                    <li><b>B.Tech</b> — UIET, Kurukshetra University (2016 – 2020)</li>
+                    <li><b>Senior Secondary (XII)</b> — Kendriya Vidyalaya (2016)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="foot">
+            <span>Languages: English · Hindi</span>
+            <span>Portfolio: aman-yadav-portfolio.vercel.app</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

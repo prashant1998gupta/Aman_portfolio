@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Aman Yadav logo">
+  <defs>
+    <linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3d71"/>
+      <stop offset="100%" stop-color="#f9004d"/>
+    </linearGradient>
+  </defs>
+  <!-- tile -->
+  <rect x="3" y="3" width="90" height="90" rx="24" fill="#0b1120"/>
+  <rect x="4.5" y="4.5" width="87" height="87" rx="22.5" fill="none" stroke="url(#pg)" stroke-width="3" opacity="0.95"/>
+  <!-- A legs -->
+  <path d="M48 24 L25 72" stroke="#ffffff" stroke-width="13" stroke-linecap="round" fill="none"/>
+  <path d="M48 24 L71 72" stroke="#ffffff" stroke-width="13" stroke-linecap="round" fill="none"/>
+  <!-- crossbar as play button -->
+  <path d="M38 50 L58 59.5 a2.2 2.2 0 0 1 0 4 L38 73 Z" fill="url(#pg)" stroke="url(#pg)" stroke-width="5" stroke-linejoin="round"/>
+  <!-- level-complete dot -->
+  <circle cx="79" cy="79" r="4.5" fill="url(#pg)"/>
+</svg>

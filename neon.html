@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Please don't shoot the sign — Aman Yadav</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="index, follow">
+<meta name="description" content="A tiny physics toy by Unity game developer Aman Yadav: a neon OPEN sign hanging on chains, a wall switch and a slingshot. Flip the switch, swing the sign, break the tubes. Please don't.">
+<meta name="author" content="Aman Yadav">
+<meta name="theme-color" content="#06070a">
+<link rel="canonical" href="https://aman-yadav-portfolio.vercel.app/neon">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Please don't shoot the sign.">
+<meta property="og:description" content="A neon sign, a switch and a slingshot. A physics toy from Aman Yadav's portfolio.">
+<meta property="og:url" content="https://aman-yadav-portfolio.vercel.app/neon">
+<meta property="og:image" content="https://aman-yadav-portfolio.vercel.app/assets/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Please don't shoot the sign.">
+<meta name="twitter:description" content="A neon sign, a switch and a slingshot. A physics toy from Aman Yadav's portfolio.">
+<meta name="twitter:image" content="https://aman-yadav-portfolio.vercel.app/assets/images/og-cover.jpg">
+<link rel="icon" type="image/svg+xml" href="assets/images/logo/logo-mark.svg">
+<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:700,800|Poppins:300,400,500&display=swap");
+
+    :root {
+        --lit: 0;
+        --ink: #ece6da;
+        --pink: #ff5c8d;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+        background: #06070a;
+        color: var(--ink);
+        font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+        overscroll-behavior: none;
+    }
+
+    /* faint tile grid on the wall */
+    .grid {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0; inset: 0;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, .045) 1px, transparent 1px);
+        background-size: 56px 56px;
+        background-position: center top;
+    }
+
+    /* the copy the sign lights up — sits under the canvas */
+    .scene {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0; inset: 0;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center;
+        padding: 42vh 24px 110px;
+        pointer-events: none;
+    }
+    .scene .time {
+        font-family: var(--mono);
+        font-size: 12px; letter-spacing: 4px;
+        color: rgba(236, 230, 218, .55);
+        margin-bottom: 18px;
+    }
+    .scene h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: clamp(38px, 7vw, 86px);
+        line-height: 1.04;
+        letter-spacing: -.02em;
+        text-shadow: 0 0 calc(var(--lit) * 30px) rgba(255, 60, 120, calc(var(--lit) * .38));
+    }
+    .scene h1 em { font-style: normal; color: var(--pink); }
+    .scene p {
+        margin-top: 22px;
+        max-width: 640px;
+        font-size: clamp(15px, 1.5vw, 19px);
+        font-weight: 300;
+        line-height: 1.6;
+        color: rgba(236, 230, 218, .78);
+    }
+    .closed-copy { display: none; }
+    .scene.closed .open-copy { display: none; }
+    .scene.closed .closed-copy { display: block; }
+    .scene.closed h1 em { color: #7fd6ff; }
+    .scene.closed h1 { text-shadow: 0 0 calc(var(--lit) * 30px) rgba(70, 170, 255, calc(var(--lit) * .5)); }
+
+    .desk { display: inline; }
+    .mob { display: none; }
+
+    canvas#room {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0; inset: 0;
+        display: block;
+        touch-action: none;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    /* HUD */
+    .hud {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0; inset: 0;
+        pointer-events: none;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: rgba(236, 230, 218, .55);
+    }
+    .hud > * { pointer-events: auto; }
+    .hud .tl {
+        position: absolute; top: 16px; left: 18px;
+        line-height: 1.7; letter-spacing: .5px;
+        pointer-events: none;
+    }
+    .hud b { color: var(--ink); font-weight: 600; }
+    .hud .dim { color: rgba(236, 230, 218, .35); }
+    .hud .tr { position: absolute; top: 14px; right: 18px; display: flex; gap: 8px; }
+    .hud button, .hud a {
+        font: inherit; letter-spacing: .5px;
+        color: rgba(236, 230, 218, .72);
+        background: rgba(255, 255, 255, .04);
+        border: 1px solid rgba(255, 255, 255, .13);
+        border-radius: 999px;
+        padding: 6px 12px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: color .2s, border-color .2s, background .2s, transform .2s;
+    }
+    .hud button:hover, .hud a:hover,
+    .hud button:focus-visible, .hud a:focus-visible {
+        color: #fff;
+        border-color: rgba(255, 255, 255, .32);
+        background: rgba(255, 255, 255, .08);
+        outline: none;
+    }
+    .hud .fix {
+        position: absolute; left: 50%; top: 16px;
+        transform: translateX(-50%);
+        border-color: rgba(255, 92, 141, .6);
+        color: #ffb3c8;
+        box-shadow: 0 0 18px rgba(249, 0, 77, .28);
+        animation: fixPulse 1.6s ease-in-out infinite;
+    }
+    .hud .fix[hidden] { display: none; }
+    @keyframes fixPulse {
+        50% { box-shadow: 0 0 30px rgba(249, 0, 77, .55); border-color: rgba(255, 92, 141, 1); }
+    }
+    .hud .hire {
+        position: absolute; right: 18px; bottom: 16px;
+        border-color: rgba(255, 92, 141, .5);
+        color: #ffd1de;
+    }
+    .hud .hire:hover { border-color: var(--pink); background: rgba(249, 0, 77, .16); }
+    .hud .hint {
+        position: absolute; left: 190px; right: 150px; bottom: 20px;
+        text-align: center;
+        font-size: 11px; letter-spacing: .5px;
+        color: rgba(236, 230, 218, .42);
+        pointer-events: none;
+    }
+    kbd {
+        font: inherit;
+        border: 1px solid rgba(255, 255, 255, .22);
+        border-radius: 4px;
+        padding: 0 5px;
+    }
+    .toast {
+        position: absolute; left: 50%; bottom: 84px;
+        transform: translate(-50%, 18px);
+        opacity: 0;
+        background: #0b0d14;
+        border: 1px solid rgba(255, 92, 141, .55);
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 10px;
+        font-size: 12px; letter-spacing: 1px;
+        box-shadow: 0 14px 40px rgba(249, 0, 77, .25);
+        transition: opacity .35s, transform .35s cubic-bezier(.2, .9, .3, 1.2);
+        pointer-events: none;
+        white-space: nowrap;
+        max-width: calc(100vw - 32px);
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    noscript .nojs {
+        position: fixed; inset: 0; display: grid; place-items: center;
+        padding: 24px; text-align: center; background: #06070a; color: var(--ink);
+        font-family: var(--mono); z-index: 10;
+    }
+    noscript .nojs a { color: var(--pink); }
+
+    @media (max-width: 699px) {
+        .desk { display: none; }
+        .mob { display: inline; }
+        .scene { padding: 36vh 20px 150px; }
+        .scene h1 { font-size: clamp(34px, 11vw, 48px); }
+        .scene p { font-size: 15px; margin-top: 16px; }
+        .hud .tl { top: 14px; left: 16px; font-size: 11px; }
+        .hud .tr { top: 12px; right: 14px; }
+        .hud button, .hud a { padding: 6px 10px; font-size: 11px; }
+        .hud .fix { top: 58px; }
+        .hud .hint { display: none; }
+        .hud .hire { right: 14px; bottom: 14px; }
+        .toast { bottom: 70px; white-space: normal; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .hud .fix { animation: none; }
+        .toast { transition: opacity .2s; }
+    }
+</style>
+</head>
+<body>
+<div class="grid" aria-hidden="true"></div>
+
+<main class="scene" id="scene">
+    <span class="time" id="clock"></span>
+    <div class="copy open-copy">
+        <h1>Please don't <br>shoot the <em>sign</em>.</h1>
+        <p>
+            <span class="desk">Flip the switch to power the neon on and off.<br>Use the slingshot to hit the tubes, the switch — or your conscience.</span>
+            <span class="mob">Tap the switch to power the neon. Pull the pebble back to hit the tubes or the switch. Drag the sign to swing it.</span>
+        </p>
+    </div>
+    <div class="copy closed-copy">
+        <h1>Well. Now it's <em>closed</em>.</h1>
+        <p>All four tubes are gone. Good thing fixing broken things is the whole job.</p>
+    </div>
+</main>
+
+<canvas id="room" aria-label="Interactive neon sign scene: a hanging OPEN sign, a wall switch and a slingshot"></canvas>
+
+<div class="hud">
+    <div class="tl">neon-room · <b id="state">off</b><br>shots <b id="shots">0</b> · tubes <b id="tubes">0</b><span class="dim">/4</span></div>
+    <div class="tr">
+        <button id="sound" type="button" aria-pressed="true">sound: on</button>
+        <a class="back" href="index.html">← portfolio</a>
+    </div>
+    <button id="fix" class="fix" type="button" hidden>fix the sign</button>
+    <a class="hire" href="index.html#contact">hire me →</a>
+    <div class="hint">flip the switch · pull the pebble back and let go · grab the sign to swing it · hover it to hear it buzz · <kbd>space</kbd> switch · <kbd>r</kbd> repair · <kbd>m</kbd> mute</div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<noscript><div class="nojs"><p>The neon room needs JavaScript.<br><a href="index.html">← back to the portfolio</a></p></div></noscript>
+
+<script src="assets/js/neon.js?v=2"></script>
+</body>
+</html>
